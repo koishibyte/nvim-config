@@ -49,7 +49,7 @@ vim.opt.cursorline = true
 vim.opt.hlsearch = true
 vim.opt.incsearch = true
 
-local undoir = vim.fn.expand("~/.vim/undodir")
+local undodir = vim.fn.expand("~/.vim/undodir")
 if
 	vim.fn.isdirectory(undodir) == 0
 then
@@ -65,3 +65,11 @@ vim.opt.undodir = undodir
 vim.o.autocomplete = true
 
 vim.lsp.enable('clangd')
+
+vim.o.clipboard = "unnamedplus"
+vim.api.nvim_create_autocmd("TextYankPost", {
+  desc = "highlight on yank",
+  callback = function()
+    vim.hl.on_yank()
+  end,
+})
